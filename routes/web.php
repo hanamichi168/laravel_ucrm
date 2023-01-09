@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\InertiaTestController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\CsvDownloadController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PurchaseController;
@@ -14,6 +15,9 @@ Route::resource('/items', ItemController::class)->middleware(['auth', 'verified'
 Route::resource('/customers', CustomerController::class)->middleware(['auth', 'verified']);
 
 Route::resource('/purchases', PurchaseController::class)->middleware(['auth', 'verified']);
+
+Route::get('/csv/index',[CsvDownloadController::class, 'index'])->name('csv.index')->middleware(['auth', 'verified']);
+Route::get('/csv/download',[CsvDownloadController::class, 'download'])->name('csv.download')->middleware(['auth', 'verified']);
 
 Route::get('/inertia-test', function () {
     return Inertia::render('InertiaTest');
