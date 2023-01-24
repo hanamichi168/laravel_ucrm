@@ -51,6 +51,10 @@ const storePurchase = () => {
     })
     Inertia.post(route('purchases.store'), form)
 }
+
+const setCustomerId = id => {
+  form.customer_id = id
+}
 </script>
 
 <template>
@@ -80,14 +84,15 @@ const storePurchase = () => {
                                 </div>
                                 <div class="p-2 w-full">
                                   <div class="relative">
-                                    <MicroModal />
-                                    <label for="customer" class="leading-7 text-sm text-gray-600">会員名</label>
-                                    <select type="date" name="customer" v-model="form.customer_id" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+
+                                    <label for="customer" class="leading-7 text-sm text-gray-600">会員名{{form.customer_id}}</label>
+                                    <!-- <select type="date" name="customer" v-model="form.customer_id" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                       <option v-for="customer in customers" :value="customer.id" :key="customer.id">
                                       {{ customer.id }} : {{ customer.name }}
                                       </option>
-                                    </select>
+                                    </select> -->
                                     <!-- <InputError class="mt-2" :message="form.errors.name" /> -->
+                                    <MicroModal @update:customerId="setCustomerId"/>
                                   </div>
                                 </div>
                                 <div class="w-full mx-auto overflow-auto mt-4">
@@ -118,7 +123,7 @@ const storePurchase = () => {
                               </table>
                             </div>
                                 <div class="p-2 w-full">
-                                  <div class="relative">
+                                  <div>
                                     <label for="price" class="leading-7 text-sm text-gray-600">合計金額</label>
                                     <div type="number" id="price" name="price" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                       {{ totalPrice }}円</div>
