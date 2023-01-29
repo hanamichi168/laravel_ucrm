@@ -39,6 +39,7 @@ class ItemController extends Controller
      */
     public function store(StoreItemRequest $request)
     {
+        dd($request->file);
         Item::create([
             'name' => $request->name,
             'memo' => $request->memo,

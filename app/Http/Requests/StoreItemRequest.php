@@ -6,6 +6,18 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreItemRequest extends FormRequest
 {
+    private $mimetypes = [
+        'text/csv',                                                          // csv
+        'text/plain',                                                        // csv
+        'application/vnd.ms-excel',                                          // excel ( .xls OFFICE2007より過去 )
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // excel ( .xlsx OFFICE 2007以降 )
+    ];
+
+    private $extensions = [
+        'csv',
+        'xls',
+        'xlsx',
+    ];
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -27,6 +39,12 @@ class StoreItemRequest extends FormRequest
             'name'=>['required', 'max:50'],
             'memo'=>['required', 'max:255'],
             'price'=>['required', 'numeric'],
+            'file' => [
+                'required',
+                'file',
+                // 'mimetypes:' . implode(',', $this->mimetypes),
+                'extensions:' . implode(',', $this->extensions),
+            ],
         ];
     }
 }
