@@ -30,12 +30,36 @@ class PurchaseController extends Controller
     public function create()
     {
         // $customers = Customer::select('id', 'name', 'kana')->get();
+        $lists = array();
+        $selectOption = array();
+        for ($i=1;$i<=4;$i++) {
+            $lists['lists'][$i] = array(
+                'no' => $i,
+                'name' => null
+            );
+            $selectOption[$i] = array(
+                'no' => $i,
+                'name' => "オプション".$i,
+                'image_url' => "",
+                'name2' => "オプション２つ目".$i,
+            );
+        }
+        $selectOption[5] = array(
+            'no' => 5,
+            'name' => "オプション5",
+            'image_url' => asset('storage/1031.jpg'),
+            'name2' => "オプション２つ目5",
+        );
+        // $a = storage_path('app\public\1031.jpg');
+        $a = asset('storage/1031.jpg');
         $items = Item::select('id', 'name', 'price')
             ->where('is_selling', true)->get();
 
         return Inertia::render('Purchases/Create', [
             // 'customers' => $customers,
-            'items' => $items
+            'items' => $items,
+            'lists' => array_values($lists),
+            'selectOption' => $selectOption,
             ]);
     }
 
