@@ -92,6 +92,7 @@ const storePurchase = () => {
 }
 
 const changeSelectOption = (no, e) => {
+  console.log(e.target)
   let selectNo = e.target.value
   console.log(props.selectOption[selectNo].name2)
   if (selectNo == 0) {
@@ -100,7 +101,7 @@ const changeSelectOption = (no, e) => {
     selectList1s.value[no].name = props.selectOption[selectNo].name
     selectList1s.value[no].image_url = props.selectOption[selectNo].image_url
 
-    form.items[no].nos = selectNo
+    //form.items[no].nos = selectNo
   } else {
     selectList2s.value[no].name = props.selectOption[selectNo].name
   }

@@ -4,8 +4,10 @@ use App\Http\Controllers\InertiaTestController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\CsvDownloadController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ExcelImportController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\RequestTestController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -18,6 +20,13 @@ Route::resource('/purchases', PurchaseController::class)->middleware(['auth', 'v
 
 Route::get('/csv/index',[CsvDownloadController::class, 'index'])->name('csv.index')->middleware(['auth', 'verified']);
 Route::get('/csv/download',[CsvDownloadController::class, 'download'])->name('csv.download')->middleware(['auth', 'verified']);
+
+Route::get('/requestTest/create',[RequestTestController::class, 'create'])->name('request.create')->middleware(['auth', 'verified']);
+Route::post('/requestTest/confirm',[RequestTestController::class, 'confirm'])->name('request.confirm')->middleware(['auth', 'verified']);
+Route::post('/requestTest/createBack',[RequestTestController::class, 'createBack'])->name('request.createBack')->middleware(['auth', 'verified']);
+
+Route::get('/ExcelImport',[ExcelImportController::class, 'index'])->name('ExcelImport')->middleware(['auth', 'verified']);
+Route::post('/ExcelImport',[ExcelImportController::class, 'import'])->name('ExcelImport.post')->middleware(['auth', 'verified']);
 
 Route::get('/inertia-test', function () {
     return Inertia::render('InertiaTest');
