@@ -44,6 +44,9 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('csv.index')" :active="route().current('items.index')">
                                     CSV
                                 </NavLink>
+                                <NavLink :href="route('PurchaseItem')" :active="route().current('PurchaseItem')">
+                                    発注書ページ
+                                </NavLink>
                             </div>
                         </div>
 
@@ -138,6 +141,9 @@ const showingNavigationDropdown = ref(false);
                         </ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('csv.index')" :active="route().current('items.index')">
                             CSV
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('PurchaseItem')" :active="route().current('PurchaseItem')">
+                            発注書ページ
                         </ResponsiveNavLink>
                     </div>
 
