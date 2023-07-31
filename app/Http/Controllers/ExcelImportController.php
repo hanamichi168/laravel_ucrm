@@ -44,11 +44,12 @@ class ExcelImportController extends Controller
         $sheet = $spreadsheet->getSheetByName(1);
 
         $a = $sheet->getCellByColumnAndRow(1,7)->getValue();
-        dd($a);
+
         $cellStyle = $spreadsheet->getActiveSheet()->getStyle('A2');
-        $cellStyle = $spreadsheet->getActiveSheet()->getStyleByColumnAndRow(1,1);
-        $a = $cellStyle->getFill()->getEndColor()->getArgb();
+        $cellStyle = $spreadsheet->getActiveSheet()->getStyleByColumnAndRow(1,2);
+        $a['B1'] = $cellStyle->getFill()->getEndColor()->getRGB();
         // $a = $sheet->getTabColor();
+        dd($a);
 
         // $spreadsheet = new Spreadsheet();
         // $sheet = $spreadsheet->getActiveSheet();

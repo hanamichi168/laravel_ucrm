@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::resource('/items', ItemController::class)->middleware(['auth', 'verified']);
+Route::post('/items-test',[ItemController::class, 'test'])->name('items.test');
 
 Route::resource('/customers', CustomerController::class)->middleware(['auth', 'verified']);
 

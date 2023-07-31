@@ -6,6 +6,7 @@ use App\Models\Item;
 use App\Http\Requests\StoreItemRequest;
 use App\Http\Requests\UpdateItemRequest;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
@@ -117,4 +118,11 @@ class ItemController extends Controller
             'status' => 'danger'
         ]);
     }
+
+    public function test(Request $request)
+    {
+        dd($request->all());
+        return to_route('items.show',['item'=>2]);
+    }
+
 }

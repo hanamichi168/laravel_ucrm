@@ -6,6 +6,11 @@ import FlashMessage from '@/Components/FlashMessage.vue'
 defineProps({
     items: Array
 })
+const disabled = e => {
+    console.log(e.target.disabled)
+    e.target.disabled = true
+}
+
 </script>
 
 <template>
@@ -24,9 +29,10 @@ defineProps({
                     <div class="p-6 text-gray-900">
                         <section class="text-gray-600 body-font">
                             <div class="flex pl-4 my-4 lg:w-2/3 w-full mx-auto">
-                                <Link as="button" :href="route('items.create')"
+                                <!-- <Link as="button"  @progress="disabled" :href="route('items.create')" -->
+                                <button  @click="disabled"
                                     class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded"
-                                >商品登録</Link>
+                                >商品登録</button>
                             </div>
                             <div class="lg:w-2/3 w-full mx-auto overflow-auto">
                               <table class="table-auto w-full text-left whitespace-no-wrap">
@@ -42,7 +48,7 @@ defineProps({
                                   <tr v-for="item in items" :key="item.id">
                                     <td class="px-4 py-3">
                                         <Link :href="route('items.show', {item:item.id})">{{ item.id }}</Link></td>
-                                    <td class="px-4 py-3">{{ item.name }}</td>
+                                    <td class="px-4 py-3">{{ item.name.slice(0, 5) }}</td>
                                     <td class="px-4 py-3">{{ item.price }}</td>
                                     <td class="px-4 py-3">
                                         <span v-if="item.is_selling === 1">販売中</span>

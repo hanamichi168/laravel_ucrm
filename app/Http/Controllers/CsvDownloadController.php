@@ -40,6 +40,7 @@ class CsvDownloadController extends Controller
         $sheet = $spreadsheet->getActiveSheet();
         $sheet->setCellValue('A1', 'こんにちは！');
         $sheet->setCellValue('B1', 'Hello');
+        $sheet->getStyle('B1');
 
         $writer = new WriterCsv($spreadsheet);
         $writer->setUseBOM(false);

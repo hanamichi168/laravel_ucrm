@@ -3,14 +3,16 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, useForm } from '@inertiajs/inertia-vue3';
 
 import { ref, reactive } from 'vue'
-import { Inertia } from '@inertiajs/inertia';
-import InputError from '@/Components/InputError.vue';
+import { getToday } from '@/common'
 import ValidationErrors from '@/Components/ValidationErrors.vue';
 
+let today = getToday()
 const form = useForm({
     name: null,
     memo: null,
     price: null,
+    start_at: getToday(),
+    end_at: null,
     file:ref('')
 })
 const fileSelect = (event) =>{
@@ -21,6 +23,11 @@ const storeItem = () =>{
     form.post('/items',{
       forceFormData: true
     })
+}
+const checkdate = () => {
+  if (form.start_at > form.end_at ) {
+    form.start_at = form.end_at
+  }
 }
 </script>
 
@@ -60,6 +67,21 @@ const storeItem = () =>{
                                     <label for="price" class="leading-7 text-sm text-gray-600">商品価格</label>
                                     <input type="number" id="price" name="price" v-model="form.price" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                   </div>
+                                </div>
+                                <div class="p-2 w-full">
+                                  <div class="relative">
+                                    <label for="memo" class="leading-7 text-sm text-gray-600">公開開始日</label>
+                                    <input type="date" id="start_at" name="start_at" v-model="form.start_at"
+                                     :min="today" :max="form.end_at"
+                                     class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                  </div>
+                                </div>
+                                <div class="p-2 w-full">
+                                  <div class="relative">
+                                    <label for="memo" class="leading-7 text-sm text-gray-600">公開終了日</label>
+                                    <input type="date" id="end_at" name="end_at" v-model="form.end_at"
+                                     :min="form.start_at" @change="checkdate"
+                                     class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">                                  </div>
                                 </div>
                                 <div class="p-2 w-full">
                                   <div class="relative">
