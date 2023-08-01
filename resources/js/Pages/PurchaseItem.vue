@@ -19,10 +19,11 @@ const form = useForm({
         </template>
 
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <!-- max-w-7xl  -->
+            <div class="mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="flex justify-center">
-                        <div class="mt-2 w-1/2">
+                        <div class="mt-2 w-1/2 m-4">
                             <table class="table-auto w-full text-center m-4 border-collapse border">
                                 <thead>
                                   <tr>
@@ -71,9 +72,10 @@ const form = useForm({
                             </table>
                         </div>
                         <div class="mt-2 w-1/2">
-                            <Link as="button" :href="route('items.create')"
-                                    class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded"
-                                >aaaa</Link>
+                            <div class="m-4 p-2 w-1/3 font-medium text-center text-white bg-red-500">
+                                必須選択<br>
+                                <span class="text-xs">初回発注/発注なし/追加発注</span>
+                            </div>
                         </div>
                     </div>
                 </div>
